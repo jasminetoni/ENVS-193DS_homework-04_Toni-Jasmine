@@ -1,0 +1,101 @@
+---
+title: "ES 193DS - homework 4"
+format: html
+author: Jasmine Toni
+execute: 
+  warning: false
+  message: false
+---
+
+# ES 193DS Homework #4
+
+```{r}
+# should haves
+library(tidyverse)
+library(here)
+library(lterdatasampler)
+
+# would be nice to have
+#install.packages("performance")
+library(performance)
+#install.packages("broom")
+library(broom)
+#install.packages("flextable")
+library(flextable)
+#install.packages("ggeffects")
+library(ggeffects)
+#install.packages("car")
+library(car)
+library(naniar)
+```
+
+```{r}
+#load in the data from the website
+fish <- read_csv(
+  here("data", "ntl6_v12.csv")
+)
+```
+
+Filter the data
+
+```{r}
+#filter the data we downloaded to look at the variables we want
+trout_perch <- fish %>%
+  filter(spname == "TROUTPERCH")
+```
+
+# Problem 1
+
+1.  Mathematical Hypothesis:
+
+    Null Hypothesis (H₀): There is no linear relationship between fish length and fish weight for trout perch across all sample years.
+
+    Alternative Hypothesis (H₁): There is a linear relationship between fish length and fish weight for trout perch across all sample years.
+
+    Biological Hypotheses:
+
+    Null Hypothesis (H₀): Fish length does not predict fish weight for trout perch across all sample years.
+
+    Alternative Hypothesis (H₁): Fish length predicts fish weight for trout perch across all sample years.
+
+2.  Create a visual
+
+    ```{r missing-data-vis}
+    gg_miss_var(trout_perch)
+    ```
+
+a. The missing data is relevant to my hypothesis because there is some missing data in "weight", meaning that we will have some lengths without corresponding weights. This will creates problems because the data that I am observing will be incomplete and perhaps skew the results of the statistical tests and analysis.
+
+3.  Run your test
+
+```{r explore-data-vis}
+# will show us our missing data visually (what categories everything is missing in)
+ggplot(data = trout_perch, aes(x = length, y = weight)) +
+  geom_point()
+```
+
+```{r linear-model-trout}
+# making our linear model for the trout data
+# will show us the intercept and length
+trout_model <- lm(weight ~ length, data = trout_perch)
+
+trout_model
+```
+
+4.  Visually check your assumptions
+
+```{r checking-assumptions}
+# checking the assumptions for the data
+par(mfrow = c(2, 2))
+plot(trout_model)
+```
+
+5.  
+
+Residuals vs Fitted Plot: This plot checks the linear relationship of the data and shows the red line (the mean of the dots and their line) fitting somewhat closely to the grey dotted line.
+
+Normal Q-Q: This plot shows the points fitting on the grey dotted (expected line) very nicely, but tapering off a little bit at the end. This tells us that the data is relatively normally distributed.
+
+Scale-Location: This plot tells us about the errors that should be constant between the models assumption of constant variance. In this case, it is homoskedasticity and indicates the variability
+
+Residuals vs Leverage:
