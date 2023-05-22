@@ -90,12 +90,56 @@ par(mfrow = c(2, 2))
 plot(trout_model)
 ```
 
-5.  
+5.  Diagnostic Plot Analysis
 
 Residuals vs Fitted Plot: This plot checks the linear relationship of the data and shows the red line (the mean of the dots and their line) fitting somewhat closely to the grey dotted line.
 
 Normal Q-Q: This plot shows the points fitting on the grey dotted (expected line) very nicely, but tapering off a little bit at the end. This tells us that the data is relatively normally distributed.
 
-Scale-Location: This plot tells us about the errors that should be constant between the models assumption of constant variance. In this case, it is homoskedasticity and indicates the variability
+Scale-Location: This plot tells us about the errors that should be constant between the models assumption of constant variance. In this case, it is homoskedasticity and indicates the variability is constant and the variability of the residuals is consistent across predicted values.
 
-Residuals vs Leverage:
+Residuals vs Leverage: This plot is a diagnostic plot used to assess the influence of individual data points on the regression model. Furthermore, Cook's distance demonstrates that a few outliers have skewed this plot and removing those specific observations could potentially have a substantial impact on the regression results.
+
+6.  Summary results
+
+```{r model-summary-table}
+# store the model summary as an object
+model_summary <- summary(trout_model)
+
+# store the ANOVA table as an object
+# anova(): special function to get analysis of variance tables for a model
+model_squares <- anova(trout_model)
+
+model_summary
+```
+
+7.  Creating a table
+
+```{r}
+# can't name this chunk!
+
+model_squares_table <- tidy(model_squares) %>% 
+  # round the sum of squares and mean squares columns to have 5 digits (could be less)
+  mutate(across(sumsq:meansq, ~ round(.x, digits = 5))) %>% 
+  # round the F-statistic to have 1 digit
+  mutate(statistic = round(statistic, digits = 1)) %>% 
+  # replace the very very very small p value with < 0.001
+  mutate(p.value = case_when(
+    p.value < 0.001 ~ "< 0.001"
+  )) %>% 
+  # rename the stem_length cell to be meaningful
+  mutate(term = case_when(
+    term == "Weight" ~ "Length",
+    TRUE ~ term
+  )) %>% 
+  # make the data frame a flextable object
+  flextable() %>% 
+  # change the header labels to be meaningful
+  set_header_labels(df = "Degrees of Freedom", 
+                    sumsq = "Sum of squares",
+                    meansq = "Mean squares",
+                    statistic = "F-statistic",
+                    p.value = "p-value")
+
+model_squares_table
+```
