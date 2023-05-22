@@ -148,4 +148,32 @@ model_squares_table
 
 9.  The results showed that fish length is a highly significant predictor of fish weight for trout perch across all sample years (β = 0.199, p \< 2.2e-16). The length sum of squares (1,432) and mean squares (1,432) indicated that the variation in fish weight can be explained by the variation in fish length. Despite some unexplained variation represented by the residuals sum of squares (322.053) and mean squares (1.118), the model exhibited a strong fit (adjusted R-squared = 0.8158), demonstrating that fish length is reliable for predicting fish weight for trout perch in this study.
 
-10. 
+10. Making a graph with predictions
+
+```{r pulling-out-predictions}
+# extract model predictions using ggpredict
+predictions <- ggpredict(trout_model, terms = "length")
+
+predictions
+```
+
+```{r plotting-predictions}
+plot_predictions <- ggplot(data = trout_perch, 
+                           aes(x = length, y = weight)) +
+  # first plot the underlying data from trout_perch
+  geom_point() +
+  # then plot the predictions
+  geom_line(data = predictions, 
+            aes(x = x, y = predicted), 
+            color = "blue", linewidth = 1) +
+  # then plot the 95% confidence interval from ggpredict
+  geom_ribbon(data = predictions, 
+              aes(x = x, y = predicted, ymin = conf.low, ymax = conf.high), 
+              alpha = 0.2) +
+  # theme and meaningful labels
+  theme_bw() +
+  labs(x = "Length",
+       y = "Weight")
+
+plot_predictions
+```
