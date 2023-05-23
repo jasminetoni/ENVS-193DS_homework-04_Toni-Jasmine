@@ -46,7 +46,7 @@ trout_perch <- fish %>%
 
 # Problem 1
 
-1.  Mathematical Hypothesis:
+1.  **Mathematical Hypothesis:**
 
     Null Hypothesis (H₀): β₁ = 0 There is no linear relationship between fish length and fish weight for trout perch across all sample years.
 
@@ -58,7 +58,7 @@ trout_perch <- fish %>%
 
     Alternative Hypothesis (Hₐ): Fish length predicts fish weight for trout perch across all sample years.
 
-2.  Create a visual for missing data
+2.  **Create a visual for missing data**
 
     ```{r missing-data-vis}
     # making a visual to show all the variables with missing data
@@ -67,11 +67,11 @@ trout_perch <- fish %>%
 
 a. Caption
 
-Figure 1: **Missing values visualization for trout perch data frame throughout all sample years**. The values on the x-axis are the amount of missing data points from each variable (sex, flag, fishpart, sampletype, weight). The values on the y-axis represent all of the missing data from the trout perch in the NTL LTER data.
+**Figure 1:** **Missing values visualization for trout perch data frame throughout all sample years**. The values on the x-axis are the amount of missing data points from each variable (sex, flag, fishpart, sampletype, weight). The values on the y-axis represent all of the missing data from the trout perch in the NTL LTER data.
 
 b\. Relevance to hypothesis: the missing data is relevant to my hypothesis because there is some missing data in "weight", meaning that we will have some lengths without corresponding weights. This will creates problems because the data that I am observing will be incomplete and perhaps skew the results of the statistical tests and analysis.
 
-3.  Run your test
+3.  **Run your test**
 
 ```{r explore-data-vis}
 # will show us our missing data visually (what categories everything is missing in)
@@ -87,7 +87,7 @@ trout_model <- lm(weight ~ length, data = trout_perch)
 trout_model
 ```
 
-4.  Visually check your assumptions
+4.  **Visually check your assumptions**
 
 ```{r checking-assumptions}
 # checking the assumptions for the data
@@ -95,7 +95,7 @@ par(mfrow = c(2, 2))
 plot(trout_model)
 ```
 
-5.  Diagnostic Plot Analysis
+5.  **Diagnostic Plot Analysis**
 
 Residuals vs Fitted Plot: This plot checks the linear relationship of the data and shows the red line (the mean of the dots and their line) fitting somewhat closely to the grey dotted line.
 
@@ -105,7 +105,7 @@ Scale-Location: This plot tells us about the errors that should be constant betw
 
 Residuals vs Leverage: This plot is a diagnostic plot used to assess the influence of individual data points on the regression model. Furthermore, Cook's distance demonstrates that a few outliers have skewed this plot and removing those specific observations could potentially have a substantial impact on the regression results.
 
-6.  Summary results - ANOVA Table
+6.  **Summary results - ANOVA Table**
 
 ```{r model-summary-table}
 # store the model summary as an object
@@ -118,7 +118,7 @@ model_squares <- anova(trout_model)
 model_summary
 ```
 
-7.  Creating a table to summarize ANOVA Table
+7.  **Creating a table to summarize ANOVA Table**
 
 ```{r}
 # can't name this chunk!
@@ -153,7 +153,7 @@ model_squares_table
 
 9.  The results showed that fish length is a highly significant predictor of fish weight for trout perch across all sample years (β = 0.199, p \< 2.2e-16). With this, the null hypothesis is rejected because the length of the fish was predicted the weight of the fish across all the sample years. The population size was 290 and the signifcance level was 95% or 0.05. The length sum of squares (1,432) and mean squares (1,432) indicated that the variation in fish weight can be explained by the variation in fish length. Despite some unexplained variation represented by the residuals sum of squares (322.053) and mean squares (1.118), the model exhibited a strong fit (adjusted R-squared = 0.8158), demonstrating that fish length is reliable for predicting fish weight for trout perch in this study.
 
-10. Making a graph with predictions
+10. **Making a graph with predictions**
 
 ```{r pulling-out-predictions}
 # extract model predictions using ggpredict
@@ -182,3 +182,7 @@ plot_predictions <- ggplot(data = trout_perch,
 
 plot_predictions
 ```
+
+a\. Caption
+
+Figure 2: **Prediction visualization for trout perch data frame throughout all sample years**. The values on the x-axis represent the length (mm) of the trout perch. The values on the y-axis represent the corresponding weights (g) from the trout perch NTL LTER data. The data points are close to the line of best fit for the linear regression line. Additionally, the confidence interval of the data is represented with a ribbon and widens out near the beginning and ends of the x & y axis.
