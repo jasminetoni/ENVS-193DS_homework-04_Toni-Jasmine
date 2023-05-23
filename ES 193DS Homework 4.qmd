@@ -48,23 +48,28 @@ trout_perch <- fish %>%
 
 1.  Mathematical Hypothesis:
 
-    Null Hypothesis (H₀): There is no linear relationship between fish length and fish weight for trout perch across all sample years.
+    Null Hypothesis (H₀): β₁ = 0 There is no linear relationship between fish length and fish weight for trout perch across all sample years.
 
-    Alternative Hypothesis (H₁): There is a linear relationship between fish length and fish weight for trout perch across all sample years.
+    Alternative Hypothesis (Hₐ): β₁ **≠** 0 There is a linear relationship between fish length and fish weight for trout perch across all sample years.
 
     Biological Hypotheses:
 
     Null Hypothesis (H₀): Fish length does not predict fish weight for trout perch across all sample years.
 
-    Alternative Hypothesis (H₁): Fish length predicts fish weight for trout perch across all sample years.
+    Alternative Hypothesis (Hₐ): Fish length predicts fish weight for trout perch across all sample years.
 
-2.  Create a visual
+2.  Create a visual for missing data
 
     ```{r missing-data-vis}
+    # making a visual to show all the variables with missing data
     gg_miss_var(trout_perch)
     ```
 
-a. The missing data is relevant to my hypothesis because there is some missing data in "weight", meaning that we will have some lengths without corresponding weights. This will creates problems because the data that I am observing will be incomplete and perhaps skew the results of the statistical tests and analysis.
+a. Caption
+
+Figure 1: **Missing values visualization for trout perch data frame throughout all sample years**. The values on the x-axis are the amount of missing data points from each variable (sex, flag, fishpart, sampletype, weight). The values on the y-axis represent all of the missing data from the trout perch in the NTL LTER data.
+
+b\. Relevance to hypothesis: the missing data is relevant to my hypothesis because there is some missing data in "weight", meaning that we will have some lengths without corresponding weights. This will creates problems because the data that I am observing will be incomplete and perhaps skew the results of the statistical tests and analysis.
 
 3.  Run your test
 
@@ -109,7 +114,7 @@ model_summary <- summary(trout_model)
 # store the ANOVA table as an object
 # anova(): special function to get analysis of variance tables for a model
 model_squares <- anova(trout_model)
-
+# run the code
 model_summary
 ```
 
@@ -121,15 +126,15 @@ model_summary
 model_squares_table <- tidy(model_squares) %>% 
   # round the sum of squares and mean squares columns to have 5 digits (could be less)
   mutate(across(sumsq:meansq, ~ round(.x, digits = 5))) %>% 
-  # round the F-statistic to have 1 digit
+  # round the F-statistic to have one digit
   mutate(statistic = round(statistic, digits = 1)) %>% 
-  # replace the very very very small p value with < 0.001
+  # replace the very small p value with < 0.001
   mutate(p.value = case_when(
     p.value < 0.001 ~ "< 0.001"
   )) %>% 
   # rename the stem_length cell to be meaningful
   mutate(term = case_when(
-    term == "Weight" ~ "Length",
+    term == "length" ~ "Length (mm)",
     TRUE ~ term
   )) %>% 
   # make the data frame a flextable object
@@ -146,7 +151,7 @@ model_squares_table
 
 8.  The ANOVA table relates to the information that I get from summary() because both have the p-value (the summary() says it is 2.2e-16 and the table says it's \<0.001), F-statistic of 1281, and DF of 288. The difference is that summary() has residuals and coefficients whereas the ANOVA table has sum of squares and mean squares.
 
-9.  The results showed that fish length is a highly significant predictor of fish weight for trout perch across all sample years (β = 0.199, p \< 2.2e-16). The length sum of squares (1,432) and mean squares (1,432) indicated that the variation in fish weight can be explained by the variation in fish length. Despite some unexplained variation represented by the residuals sum of squares (322.053) and mean squares (1.118), the model exhibited a strong fit (adjusted R-squared = 0.8158), demonstrating that fish length is reliable for predicting fish weight for trout perch in this study.
+9.  The results showed that fish length is a highly significant predictor of fish weight for trout perch across all sample years (β = 0.199, p \< 2.2e-16). With this, the null hypothesis is rejected because the length of the fish was predicted the weight of the fish across all the sample years. The population size was 290 and the signifcance level was 95% or 0.05. The length sum of squares (1,432) and mean squares (1,432) indicated that the variation in fish weight can be explained by the variation in fish length. Despite some unexplained variation represented by the residuals sum of squares (322.053) and mean squares (1.118), the model exhibited a strong fit (adjusted R-squared = 0.8158), demonstrating that fish length is reliable for predicting fish weight for trout perch in this study.
 
 10. Making a graph with predictions
 
@@ -165,15 +170,15 @@ plot_predictions <- ggplot(data = trout_perch,
   # then plot the predictions
   geom_line(data = predictions, 
             aes(x = x, y = predicted), 
-            color = "blue", linewidth = 1) +
+            color = "magenta", linewidth = 1) +
   # then plot the 95% confidence interval from ggpredict
   geom_ribbon(data = predictions, 
               aes(x = x, y = predicted, ymin = conf.low, ymax = conf.high), 
               alpha = 0.2) +
   # theme and meaningful labels
   theme_bw() +
-  labs(x = "Length",
-       y = "Weight")
+  labs(x = "Length (mm)",
+       y = "Weight (g)")
 
 plot_predictions
 ```
