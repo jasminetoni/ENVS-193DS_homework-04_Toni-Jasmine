@@ -1,15 +1,11 @@
 ---
 title: "ES 193DS - homework 4"
-format: html
+format: docx
 author: Jasmine Toni
 execute: 
   warning: false
   message: false
 ---
-
-# ES 193DS Homework #4
-
-Author: Jasmine Toni
 
 Link to repository: <https://github.com/jasminetoni/ENVS-193DS_homework-04_Toni-Jasmine.git>
 
