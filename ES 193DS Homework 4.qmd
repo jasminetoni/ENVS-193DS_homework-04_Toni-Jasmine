@@ -65,8 +65,6 @@ trout_perch <- fish %>%
     gg_miss_var(trout_perch)
     ```
 
-a. Caption
-
 **Figure 1:** **Missing values visualization for trout perch data frame throughout all sample years**. The values on the x-axis are the amount of missing data points from each variable (sex, flag, fishpart, sampletype, weight). The values on the y-axis represent all of the missing data from the trout perch in the NTL LTER data.
 
 b\. Relevance to hypothesis: the missing data is relevant to my hypothesis because there is some missing data in "weight", meaning that we will have some lengths without corresponding weights. This will creates problems because the data that I am observing will be incomplete and perhaps skew the results of the statistical tests and analysis.
@@ -187,7 +185,5 @@ plot_predictions <- ggplot(data = trout_perch,
 
 plot_predictions
 ```
-
-a\. Caption
 
 **Figure 2:** **Prediction visualization for trout perch data frame throughout all sample years**. The values on the x-axis represent the length (mm) of the trout perch. The values on the y-axis represent the corresponding weights (g) from the trout perch NTL LTER data. The data points are close to the line of best fit for the linear regression line. Additionally, the confidence interval of the data is represented with a ribbon and widens out near the beginning and ends of the x & y axis.
