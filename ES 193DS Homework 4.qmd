@@ -185,4 +185,4 @@ plot_predictions
 
 a\. Caption
 
-Figure 2: **Prediction visualization for trout perch data frame throughout all sample years**. The values on the x-axis represent the length (mm) of the trout perch. The values on the y-axis represent the corresponding weights (g) from the trout perch NTL LTER data. The data points are close to the line of best fit for the linear regression line. Additionally, the confidence interval of the data is represented with a ribbon and widens out near the beginning and ends of the x & y axis.
+**Figure 2:** **Prediction visualization for trout perch data frame throughout all sample years**. The values on the x-axis represent the length (mm) of the trout perch. The values on the y-axis represent the corresponding weights (g) from the trout perch NTL LTER data. The data points are close to the line of best fit for the linear regression line. Additionally, the confidence interval of the data is represented with a ribbon and widens out near the beginning and ends of the x & y axis.
