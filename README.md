@@ -1,4 +1,6 @@
-# North Temperate Lakes LTER: Fish Lengths and Weights 1981 - current
+# READ ME: Comparing trout perch lengths against their weights (1981 - current)
+
+This README.txt file was generated on 2023-05-22 by JASMINE TONI
 
 This data package contains fish length and weight data collected as part of the North Temperate Lakes Long-Term Ecological Research (NTL LTER) project. The data span from 1981 to the present and provide valuable information on fish assemblages in eleven primary lakes, including Allequash, Big Muskellunge, Crystal, Sparkling, Trout, bog lakes, and Trout Bog, Mendota, Monona, Wingra, and Fish.
 
