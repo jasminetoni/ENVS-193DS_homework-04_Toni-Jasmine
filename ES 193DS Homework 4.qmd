@@ -170,15 +170,19 @@ plot_predictions <- ggplot(data = trout_perch,
   # then plot the predictions
   geom_line(data = predictions, 
             aes(x = x, y = predicted), 
-            color = "magenta", linewidth = 1) +
+            color = "dodgerblue3", linewidth = 1) +
   # then plot the 95% confidence interval from ggpredict
   geom_ribbon(data = predictions, 
               aes(x = x, y = predicted, ymin = conf.low, ymax = conf.high), 
               alpha = 0.2) +
   # theme and meaningful labels
-  theme_bw() +
+  theme_light() +
+  theme(
+    # change font to Times New Roman
+     text = element_text(family = "Times New Roman")) +
   labs(x = "Length (mm)",
-       y = "Weight (g)")
+       y = "Weight (g)",
+  title = "Trout Perch Data as a Prediction for Fish Length Relating Back to Fish Weight")
 
 plot_predictions
 ```
