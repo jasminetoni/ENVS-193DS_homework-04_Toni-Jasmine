@@ -91,6 +91,7 @@ trout_model
 
 ```{r checking-assumptions}
 # checking the assumptions for the data
+# make diagnostic plots
 par(mfrow = c(2, 2))
 plot(trout_model)
 ```
@@ -151,7 +152,7 @@ model_squares_table
 
 8.  The ANOVA table relates to the information that I get from summary() because both have the p-value (the summary() says it is 2.2e-16 and the table says it's \<0.001), F-statistic of 1281, and DF of 288. The difference is that summary() has residuals and coefficients whereas the ANOVA table has sum of squares and mean squares.
 
-9.  The results showed that fish length is a highly significant predictor of fish weight for trout perch across all sample years (β = 0.199, p \< 2.2e-16). With this, the null hypothesis is rejected because the length of the fish was predicted the weight of the fish across all the sample years. The population size was 290 and the signifcance level was 95% or 0.05. The length sum of squares (1,432) and mean squares (1,432) indicated that the variation in fish weight can be explained by the variation in fish length. Despite some unexplained variation represented by the residuals sum of squares (322.053) and mean squares (1.118), the model exhibited a strong fit (adjusted R-squared = 0.8158), demonstrating that fish length is reliable for predicting fish weight for trout perch in this study.
+9.  The results showed that fish length is a highly significant predictor of fish weight for trout perch across all sample years (β = 0.199, p \< 2.2e-16). With this, the null hypothesis is rejected because the length of the fish was predicted the weight of the fish across all the sample years. The population size was 290 and the signifcance level was 95% or 0.05. Additionally, the model equation for these results mean that every millimeter of fish length increase, the weight would be predicted to increase 0.20 with a deviation of 0.006 grams. The length sum of squares (1,432) and mean squares (1,432) indicated that the variation in fish weight can be explained by the variation in fish length. Despite some unexplained variation represented by the residuals sum of squares (322.053) and mean squares (1.118), the model exhibited a strong fit (adjusted R-squared = 0.8158), demonstrating that fish length is reliable for predicting fish weight for trout perch in this study.
 
 10. **Making a graph with predictions**
 
