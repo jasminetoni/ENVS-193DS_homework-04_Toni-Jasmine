@@ -9,7 +9,7 @@ execute:
 
 # ES 193DS Homework #4
 
-```{r}
+```{r set-up}
 # should haves
 library(tidyverse)
 library(here)
@@ -29,7 +29,7 @@ library(car)
 library(naniar)
 ```
 
-```{r}
+```{r load-in-data}
 #load in the data from the website
 fish <- read_csv(
   here("data", "ntl6_v12.csv")
@@ -38,7 +38,7 @@ fish <- read_csv(
 
 Filter the data
 
-```{r}
+```{r filter-data}
 #filter the data we downloaded to look at the variables we want
 trout_perch <- fish %>%
   filter(spname == "TROUTPERCH")
