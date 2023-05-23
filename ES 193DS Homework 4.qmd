@@ -9,6 +9,10 @@ execute:
 
 # ES 193DS Homework #4
 
+Author: Jasmine Toni
+
+Link to repository: <https://github.com/jasminetoni/ENVS-193DS_homework-04_Toni-Jasmine.git>
+
 ```{r set-up}
 # should haves
 library(tidyverse)
